@@ -1,0 +1,67 @@
+Multiple collections vs one collection
+
+Lists:
+- Collection of list todolist Models
+
+Models:
+- array of todos vs a model for each todo
+
+View:
+- Input View - never rerenders
+- Sidebar view - rerenders on changes to addition, change, etc to any list
+- Main View -
+
+var app = {
+
+};
+
+Todos: Collection of lists
+List: Model. Array of todo's
+ - id: title name
+Todo: Todo model
+ - id: number based on count in containing list
+
+When you add a todo:
+  if it has a title (from ul, or submit) that is in todos (i.e. it exists):
+  - find the list based on the title (it's id) in todos
+  - add a new model to that list
+  - rerender
+  if it is not in the todos (this is a new list):
+  - create a new list with title as a number
+  - add a new model to that list
+  - rerender
+
+When you want to remove a todo:
+- it will belong to a list
+  - find that list
+  - find the todo in that list and remove it
+
+When you want to toggle the completion of a todo:
+- it will belong to a list
+  - find that list
+  - find that todo in that list and toggle the completion
+
+When you save/want another todo (plus-sign):
+  If it does not have a title (the title is a number):
+  - display and focus title input and replace placeholder text to indicate
+  - add to the list and replace with a fresh list ( no list elements )
+
+Complete all in a list
+- find that list
+- complete all
+
+Delete a list
+- find that list in the todos
+- delete it
+
+Extras:
+- empty a list
+-
+
+Need methods attributes for display:
+in todos
+- count all incomplete
+
+in each list
+- number complete
+- recalculates on toggle completion
