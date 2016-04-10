@@ -44,36 +44,45 @@ var app = {
     this.bind();
     this.data = new Input();
     this.lists = new Todos();
-    // this.list_view = new ListView();
-    // this.aside_view = new AsideView();
+    this.list_view = new ListView({ collection: this.lists });
+    // this.aside_view = new AsideView({ collection: this.lists });
 
     this.dispatcher = _.extend({}, Backbone.Events);
 
+    // Listen to data input
     // Listen to user trying to save content/title
     this.dispatcher.listenTo(this.data, "add_data", this.addTodo.bind(this));
-
-    // Events:
-    // this.input new-list
-    // this.input add_data
-
-    // Listen to toggling completed
-
     // Delete a list
     this.dispatcher.listenTo(this.data, "remove_list", this.lists.remove.bind(this.lists));
-
     // Complete all todos in a list
     this.dispatcher.listenTo(this.data, "complete_all", this.lists.completeList.bind(this.lists));
-
     // Clear finished todos in a list
     this.dispatcher.listenTo(this.data, "clear_finished", this.lists.clearFinished.bind(this.lists));
 
-    // Rerender on:
-    // - any change all removed events
-    //   - rerender aside and same ul
+    // List view listen to data input
+    // Done on this.addTodo above
+    // List view listen to input remove
+    this.dispatcher.listenTo(this.data, "remove_list", this.list_view.reset.bind(this.list_view));
+    // List view listen to input complete all and clear finished
+    this.dispatcher.listenTo(this.data, "complete_all clear_finished", this.list_view.render.bind(this.list_view));
 
-    // Render new ul on:
-    // - click on aside (grab that list item with data for id)
-    // - brand new ul on new list event
+    // Listen to toggling completed
+
+    // Aside view listen to:
+    // On any of these rerender. That's it.
+    // - input
+    //    1.) Remove List
+    //    2.) Clear all
+    //    3.) New list
+    //    4.) New todo
+    // - list_vew
+    //    2.) toggleComplete
+    //    3.) Remove todo
+    //
+    // Input and List View listen to:
+    // - Aside view click on list
+    //    Show that as h1
+    //    Render that list
   },
 
   bind: function() {
@@ -90,6 +99,10 @@ var app = {
     } else {
       this.lists.add(new List({ id: data.title }));
     }
+
+    this.list_view.render({
+      id: data.title
+    });
   }
 };
 

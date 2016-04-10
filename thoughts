@@ -22,10 +22,6 @@ Todo: Todo model
  - id: number based on count in containing list
 
 When you add a todo:
-  if it has a title (from ul, or submit) that is in todos (i.e. it exists):
-  - find the list based on the title (it's id) in todos
-  - add a new model to that list
-  - rerender
   if it is not in the todos (this is a new list):
   - create a new list with title as a number
   - add a new model to that list
@@ -65,3 +61,12 @@ in todos
 in each list
 - number complete
 - recalculates on toggle completion
+
+
+To render a list:
+List view:
+  - Biggest problem: how does it know which list to show?
+  - It doesn't need to know which list is shown, it just needs to respond to events on the input 
+  - List view:
+    el: $("ul")
+    adds li: item on add event

@@ -86,7 +86,7 @@
   <footer></footer>
 
   <script type="text/x-handlebars" id="todo_template">
-    {{#each todo}}
+    {{#with todo}}
     <li data-id={{id}}>
       <span>
         {{#if completed}}
@@ -98,7 +98,7 @@
       </span>
       <div class="cross"></div>
     </li>
-    {{/each}}
+    {{/with}}
   </script>
 
   <script type="text/x-handlebars" id="input_template">
@@ -116,6 +116,7 @@
   <script src="javascripts/models/todo.js"></script>
   <script src="javascripts/models/list.js"></script>
   <script src="javascripts/collections/todos.js"></script>
+  <script src="javascripts/views/list.js"></script>
   <script src="javascripts/app.js"></script>
 </body>
 </html>
