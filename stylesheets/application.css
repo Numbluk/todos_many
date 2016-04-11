@@ -150,6 +150,12 @@ input[type="text"]:focus {
   border: none;
 }
 
+input[type="text"]#edit_todo {
+  padding-left: 70px;
+  background: #D5D5D5;
+  height: 108px;
+}
+
 input#content {
   display: none;
 }

@@ -20,7 +20,6 @@ var AsideView = Backbone.View.extend({
       var return_html = "<ul id='completed_lists'>";
       lists.each(function(list) {
         if ( list.areAllCompleted() ) {
-          console.log(list.toJSON());
           return_html += "\n<li data-title='" + list.id + "'>";
 
           return_html += "\n<div class='title'>";
@@ -36,7 +35,6 @@ var AsideView = Backbone.View.extend({
     Handlebars.registerHelper("getUnfinishedLists", function(lists) {
       var return_html = "<ul id='incompleted_lists'>";
       lists.each(function(list) {
-        console.log();
         if ( !list.areAllCompleted()) {
           return_html += "\n<li data-title='" + list.id + "'>";
 

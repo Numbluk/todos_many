@@ -13,6 +13,17 @@ var List = Backbone.Model.extend({
     this.count++;
   },
 
+  edit: function(id_and_content) {
+    var id = id_and_content.todo_obj.id;
+    var content = id_and_content.todo_obj.content;
+
+    this.todos.forEach(function(todo) {
+      if ( todo.id == id ) {
+        todo.set("content", content);
+      }
+    });
+  },
+
   toggleComplete: function(id) {
     var todo = this.todos.find(function(todo) {
       return todo.id == id;

@@ -23,5 +23,9 @@ var Todos = Backbone.Collection.extend({
       total_unfinished += list.getTodosUnfinished();
     });
     return total_unfinished;
+  },
+
+  editTodo: function(list_and_todo) {
+    this.get(list_and_todo.list_id).edit(list_and_todo);
   }
 });

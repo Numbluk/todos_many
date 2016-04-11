@@ -70,6 +70,8 @@ var app = {
     this.dispatcher.listenTo(this.list_view, "toggle-complete", this.lists.toggleComplete.bind(this.lists));
     // List view needs to trigger a delete todo
     this.dispatcher.listenTo(this.list_view, "remove-todo", this.lists.removeTodo.bind(this.lists));
+    // List view triggers edit-todo
+    this.dispatcher.listenTo(this.list_view, "edit-todo", this.lists.editTodo.bind(this.lists));
 
     // Aside view listen to to rerender
     this.dispatcher.listenTo(this.data, "add_data remove_list complete_all clear_finished", this.aside_view.render.bind(this.aside_view));

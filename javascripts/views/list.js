@@ -5,7 +5,9 @@ var ListView = Backbone.View.extend({
 
   events: {
     "click input[type='checkbox']": "toggleComplete",
-    "click div.cross": "removeTodo"
+    "click div.cross": "removeTodo",
+    "dblclick li p": "editTodo",
+    "keypress input#edit_todo": "submitEdit"
   },
 
   reset: function() {
@@ -42,5 +44,27 @@ var ListView = Backbone.View.extend({
       list_id: list_id
     });
     this.render({ id: list_id });
+  },
+
+  editTodo: function(e) {
+    var li_todo = $(e.target).closest("li");
+    li_todo.html("<input type='text' id='edit_todo' minlength='1'>");
+    li_todo.find("input").focus();
+    // fix for empty
+  },
+
+  submitEdit: function(e) {
+    if ( e.which === 13) {
+      var curr_list = $(e.target).closest("ul").attr("data-title");
+      this.trigger("edit-todo", {
+        list_id: curr_list,
+        todo_obj: {
+          id: +$(e.target).closest("li").attr("data-id"),
+          content: $(e.target).val()
+        }
+      });
+
+      this.render({ id: curr_list });
+    }
   }
 });
