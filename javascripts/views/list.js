@@ -15,12 +15,14 @@ var ListView = Backbone.View.extend({
   render: function(obj_as_id) {
     var view = this;
     view.$el.empty();
+    var curr_list = view.collection.get(obj_as_id);
 
-    view.collection.get(obj_as_id).todos.forEach(function(todo) {
+    curr_list.todos.forEach(function(todo) {
       view.$el.append(view.template({
         todo: todo.toJSON()
       }));
     });
+    $("h1").text(curr_list.id);
   },
 
   toggleComplete: function(e) {

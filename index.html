@@ -112,11 +112,50 @@
       </label>
   </script>
 
+  <script type="text/x-handlebars" id="aside_template">
+
+      <div id="heading">
+        <h2>Overview</h2>
+      </div>
+
+      <div id="incompleted_heading">
+        <h4>Incomplete</h4>
+        <span class="subheading">{{getTotalTodosUnfinished lists}}</span>
+        {{{ getUnfinishedLists lists }}}
+      </div>
+
+      <div id="completed_heading">
+        <h4>Complete</h4>
+        {{{ getFinishedLists lists }}}
+      </div>
+  </script>
+  <!-- <div id="incompleted_heading">
+  <h4>Incomplete</h4>
+  <span class="subheading">{{ getTotalUnfinished lists }}</span>
+  <ul id="incompleted_lists">
+  {{#each lists.models}}
+  <li>
+  <div class="title">{{id}}</div>
+  <div class="todos_left">{{ getNumberUnfinished this.todos }}</div>
+</li>
+</ul>
+</div>
+
+<div id="completed_heading">
+<h4>Complete</h4>
+<ul id="completed_lists">
+<li>Title</li>
+<li>Another</li>
+<li>Cool titles</li>
+</ul>
+</div> -->
+
   <script src="javascripts/views/input.js"></script>
   <script src="javascripts/models/todo.js"></script>
   <script src="javascripts/models/list.js"></script>
   <script src="javascripts/collections/todos.js"></script>
   <script src="javascripts/views/list.js"></script>
+  <script src="javascripts/views/aside.js"></script>
   <script src="javascripts/app.js"></script>
 </body>
 </html>

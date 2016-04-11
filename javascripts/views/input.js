@@ -21,11 +21,11 @@ var Input = Backbone.View.extend({
   },
 
   newList: function() {
-    console.log($("ul").attr("data-title"));
-    if ( $("ul").attr("data-title") == true ) {
+    console.log($("ul#todos").attr("data-title"));
+    if ( $("ul#todos").attr("data-title") == true ) {
       this.trigger("new-list");
       this.render();
-      $("header h1").text('todos');
+      // $("header h1").text('todos');
     } else {
       if ( $("#content_title").is(":visible") ) {
         console.log('stuff');
@@ -52,7 +52,7 @@ var Input = Backbone.View.extend({
           this.newList();
           return;
         }
-        $("ul").attr("data-title", this.getTitle());
+        $("ul#todos").attr("data-title", this.getTitle());
         $("header h1").text(this.getTitle());
         $content_title.attr("placeholder", "Title, please");
         this.trigger("add_data", this.getData());
@@ -74,7 +74,7 @@ var Input = Backbone.View.extend({
 
   getData: function() {
     var data_content = this.$el.serializeArray()[0].value;
-    var data_title = $("ul").attr("data-title");
+    var data_title = $("ul#todos").attr("data-title");
 
     // data = { name: "content_title", value: "title"}
     var data = {

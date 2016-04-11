@@ -248,10 +248,22 @@ aside h4 {
 aside span.subheading {
   font-size: 2.4rem;
   float: right;
+  line-height: 3rem;
+}
+
+aside ul {
+  margin-left: -20px;
+  width: 220px;
 }
 
 aside li {
+  padding: 0 20px;
   list-style: none;
+}
+
+aside li:hover{
+  cursor: pointer;
+  background: rgb(59, 87, 114);
 }
 
 aside li::after {

@@ -42,4 +42,27 @@ var List = Backbone.Model.extend({
       todo.set("completed", true);
     });
   },
+
+  getTodosUnfinished: function() {
+    var total_unfinished = 0;
+
+    this.todos.forEach(function(todo) {
+      if ( todo.get("completed") === false ) {
+        total_unfinished += 1;
+      }
+    });
+
+    return total_unfinished;
+  },
+
+  areAllCompleted: function() {
+    var state = false;
+    for( var i = 0; i < this.todos.length; i++ ) {
+      if ( !this.todos[i].get("completed")) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 });

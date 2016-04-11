@@ -15,5 +15,13 @@ var Todos = Backbone.Collection.extend({
 
   removeTodo: function(todo_and_list_id) {
     this.get(todo_and_list_id.list_id).removeTodo(todo_and_list_id.todo_id);
+  },
+
+  getTotalTodosUnfinished: function() {
+    var total_unfinished = 0;
+    this.each(function(list) {
+      total_unfinished += list.getTodosUnfinished();
+    });
+    return total_unfinished;
   }
 });

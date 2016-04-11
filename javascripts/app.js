@@ -45,12 +45,12 @@ var app = {
     this.data = new Input();
     this.lists = new Todos();
     this.list_view = new ListView({ collection: this.lists });
-    // this.aside_view = new AsideView({ collection: this.lists });
+    this.aside_view = new AsideView({ collection: this.lists });
 
     this.dispatcher = _.extend({}, Backbone.Events);
 
     // Listen to data input
-    // Listen to user trying to save content/title
+    // Listen to user trying to save content/t{{ getUnfinishedLists lists }}itle
     this.dispatcher.listenTo(this.data, "add_data", this.addTodo.bind(this));
     // Delete a list
     this.dispatcher.listenTo(this.data, "remove_list", this.lists.remove.bind(this.lists));
@@ -64,28 +64,22 @@ var app = {
     // List view listen to input remove
     this.dispatcher.listenTo(this.data, "remove_list", this.list_view.reset.bind(this.list_view));
     // List view listen to input complete all and clear finished
-    this.dispatcher.listenTo(this.data, "complete_all clear_finished", this.list_view.render.bind(this.list_view)); 
+    this.dispatcher.listenTo(this.data, "complete_all clear_finished", this.list_view.render.bind(this.list_view));
 
     // Listen to toggling completed
     this.dispatcher.listenTo(this.list_view, "toggle-complete", this.lists.toggleComplete.bind(this.lists));
     // List view needs to trigger a delete todo
     this.dispatcher.listenTo(this.list_view, "remove-todo", this.lists.removeTodo.bind(this.lists));
 
-    // Aside view listen to:
-    // On any of these rerender. That's it.
-    // - input
-    //    1.) Remove List
-    //    2.) Clear all
-    //    3.) New list
-    //    4.) New todo
-    // - list_vew
-    //    2.) toggleComplete
-    //    3.) Remove todo
-    //
-    // Input and List View listen to:
-    // - Aside view click on list
-    //    Show that as h1
-    //    Render that list
+    // Aside view listen to to rerender
+    this.dispatcher.listenTo(this.data, "add_data remove_list complete_all clear_finished", this.aside_view.render.bind(this.aside_view));
+    this.dispatcher.listenTo(this.list_view, "toggle-complete remove-todo", this.aside_view.render.bind(this.aside_view));
+
+    // // List View listen to:
+    // // - Aside view click on list
+    // //    Show that as h1
+    // //    Render that list
+    this.dispatcher.listenTo(this.aside_view, "display-list", this.list_view.render.bind(this.list_view));
   },
 
   bind: function() {
