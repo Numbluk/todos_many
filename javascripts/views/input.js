@@ -61,6 +61,11 @@ var Input = Backbone.View.extend({
       }
     } else if ( $content.is(":visible") ) {
       if ( e.which == 13) {
+        if ( this.getData().content == false ) {
+          $content.attr("placeholder", "That, cannot be empty");
+          $content.focus();
+          return;
+        }
         this.trigger("add_data", this.getData());
         this.el.reset();
       }

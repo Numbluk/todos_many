@@ -56,12 +56,18 @@ var ListView = Backbone.View.extend({
 
   submitEdit: function(e) {
     if ( e.which === 13) {
+      var input = $(e.target).val();
+      if ( input == false ) {
+        $(e.target).attr("placeholder", "Can't be empty");
+        $(e.target).focus();
+        return;
+      }
       var curr_list = $(e.target).closest("ul").attr("data-title");
       this.trigger("edit-todo", {
         list_id: curr_list,
         todo_obj: {
           id: +$(e.target).closest("li").attr("data-id"),
-          content: $(e.target).val()
+          content: input
         }
       });
 
