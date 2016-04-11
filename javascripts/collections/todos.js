@@ -7,5 +7,13 @@ var Todos = Backbone.Collection.extend({
 
   clearFinished: function(id_as_obj) {
     this.get(id_as_obj).clearFinished();
+  },
+
+  toggleComplete: function(todo_and_list_id) {
+    this.get(todo_and_list_id.list_id).toggleComplete(todo_and_list_id.todo_id);
+  },
+
+  removeTodo: function(todo_and_list_id) {
+    this.get(todo_and_list_id.list_id).removeTodo(todo_and_list_id.todo_id);
   }
 });

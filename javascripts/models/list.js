@@ -5,10 +5,6 @@ var List = Backbone.Model.extend({
     this.id = undefined;
   },
 
-  initialize: function() {
-
-  },
-
   add: function(content) {
     this.todos.unshift(new Todo({
       content: content.content,
@@ -17,9 +13,9 @@ var List = Backbone.Model.extend({
     this.count++;
   },
 
-  toggleComplete: function(data) {
+  toggleComplete: function(id) {
     var todo = this.todos.find(function(todo) {
-      data = todo.id;
+      return todo.id == id;
     });
     var current_state = todo.get("completed");
     todo.set("completed", !current_state);
@@ -29,20 +25,15 @@ var List = Backbone.Model.extend({
     var list_model = this;
     list_model.todos.forEach(function(todo) {
       if ( todo.get("completed") === true ) {
-        list_model.removeTodo(todo);
+        list_model.removeTodo(todo.get("id"));
       }
     });
   },
 
-  removeTodo: function(todo) {
-    var todos = this.todos;
-    var remove = todos.find(function(todo_in_arr, i) {
-      if ( todo_in_arr.get("id") == todo.get("id") ) {
-        return i;
-      }
+  removeTodo: function(todo_id) {
+    this.todos = this.todos.filter(function(todo_in_arr, i) {
+      return todo_in_arr.get("id") !== todo_id;
     });
-
-    todos.splice(remove, 1);
   },
 
   completeAll: function() {

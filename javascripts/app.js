@@ -64,9 +64,12 @@ var app = {
     // List view listen to input remove
     this.dispatcher.listenTo(this.data, "remove_list", this.list_view.reset.bind(this.list_view));
     // List view listen to input complete all and clear finished
-    this.dispatcher.listenTo(this.data, "complete_all clear_finished", this.list_view.render.bind(this.list_view));
+    this.dispatcher.listenTo(this.data, "complete_all clear_finished", this.list_view.render.bind(this.list_view)); 
 
     // Listen to toggling completed
+    this.dispatcher.listenTo(this.list_view, "toggle-complete", this.lists.toggleComplete.bind(this.lists));
+    // List view needs to trigger a delete todo
+    this.dispatcher.listenTo(this.list_view, "remove-todo", this.lists.removeTodo.bind(this.lists));
 
     // Aside view listen to:
     // On any of these rerender. That's it.
