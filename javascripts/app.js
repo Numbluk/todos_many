@@ -60,7 +60,6 @@ var app = {
     this.dispatcher.listenTo(this.data, "clear_finished", this.lists.clearFinished.bind(this.lists));
 
     // List view listen to data input
-    // Done on this.addTodo above
     // List view listen to input remove
     this.dispatcher.listenTo(this.data, "remove_list", this.list_view.reset.bind(this.list_view));
     // List view listen to input complete all and clear finished

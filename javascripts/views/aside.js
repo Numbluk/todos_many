@@ -1,8 +1,4 @@
 var AsideView = Backbone.View.extend({
-  // Helpers needed:
-  // - Get finished/unfinished lists
-  // 1.) Get total unfinished
-  // 2.) Get unfinished for each list
   el: $("aside"),
 
   template: Handlebars.compile($("#aside_template").html()),

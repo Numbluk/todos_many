@@ -24,6 +24,7 @@ var ListView = Backbone.View.extend({
         todo: todo.toJSON()
       }));
     });
+    view.$el.attr("data-title", obj_as_id.id);
     $("h1").text(curr_list.id);
   },
 
